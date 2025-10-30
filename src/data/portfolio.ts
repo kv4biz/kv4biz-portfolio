@@ -89,16 +89,19 @@ export const skillCategories = [
     icon: "Code2",
     skills: [
       { name: "HTML5 · CSS3 · JavaScript · TypeScript", level: 90 },
-      { name: "React.js · Next.js · Redux", level: 90 },
-      { name: "Tailwind CSS · Vite", level: 90 },
+      { name: "React.js · Next.js · Vite.js", level: 90 },
+      { name: "Redux · Zustand", level: 90 },
+      { name: "Tailwind CSS · Shadcn UI)", level: 90 },
     ],
   },
   {
     title: "Backend Development",
     icon: "Server",
     skills: [
-      { name: "Node.js · Express.js", level: 90 },
-      { name: "Nest.js · Appwrite", level: 75 },
+      { name: "Node.js", level: 90 },
+      { name: "Express.js", level: 90 },
+      { name: "Appwrite", level: 85 },
+      { name: "Nest.js", level: 75 },
     ],
   },
   {
@@ -106,6 +109,8 @@ export const skillCategories = [
     icon: "Database",
     skills: [
       { name: "PostgreSQL · MongoDB · SQL", level: 90 },
+      { name: "Prisma · Supabase", level: 85 },
+      { name: "AWS · Vercel", level: 90 },
       { name: "Docker", level: 90 },
     ],
   },
@@ -113,8 +118,10 @@ export const skillCategories = [
     title: "Design & Tools",
     icon: "GitBranch",
     skills: [
-      { name: "Figma · Adobe XD", level: 90 },
-      { name: "Git · GitHub · VSCode", level: 90 },
+      { name: "Figma", level: 90 },
+      { name: "Jest · React Testing Library", level: 80 },
+      { name: "Git · GitHub ", level: 90 },
+      { name: "VSCode · Cursor", level: 90 },
     ],
   },
 ];
