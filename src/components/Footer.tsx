@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
-import { Heart } from "lucide-react";
-import { personalInfo } from "../data/portfolio";
+import { motion } from 'motion/react';
+import { Heart } from 'lucide-react';
+import { personalInfo } from '../data/portfolio';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,13 +18,14 @@ export function Footer() {
             className="text-muted-foreground text-center"
           >
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              <span>
-                © {currentYear} {personalInfo.name}.
-              </span>
+              <span>© {currentYear} {personalInfo.name}.</span>
               <br className="md:hidden" />
               <div className="flex items-center gap-2">
                 <span>Made with</span>
-                <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
                   <Heart className="w-4 h-4 fill-red-500 text-red-500" />
                 </motion.div>
                 <span>and lots of coffee ☕</span>
@@ -45,7 +46,7 @@ export function Footer() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear",
+            ease: "linear"
           }}
         />
       </div>

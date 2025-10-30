@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring } from "motion/react";
-import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from 'motion/react';
+import { useEffect, useState } from 'react';
 
 export function CursorFollower() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -24,14 +24,14 @@ export function CursorFollower() {
     const checkScreenSize = () => {
       setIsLargeScreen(window.innerWidth >= 1024);
     };
-
+    
     checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
+    window.addEventListener('resize', checkScreenSize);
 
     const handleMouseMove = (event: MouseEvent) => {
       // Only track mouse on large screens
       if (window.innerWidth < 1024) return;
-
+      
       setMousePosition({ x: event.clientX, y: event.clientY });
       cursorX.set(event.clientX - 16);
       cursorY.set(event.clientY - 16);
@@ -40,7 +40,7 @@ export function CursorFollower() {
 
     const handleMouseEnter = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.tagName === "BUTTON" || target.tagName === "A" || target.closest("button") || target.closest("a")) {
+      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.closest('button') || target.closest('a')) {
         setIsHovering(true);
       }
     };
@@ -53,17 +53,17 @@ export function CursorFollower() {
       setIsVisible(false);
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseover", handleMouseEnter);
-    document.addEventListener("mouseout", handleMouseLeave);
-    document.addEventListener("mouseleave", handleMouseOut);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseover', handleMouseEnter);
+    document.addEventListener('mouseout', handleMouseLeave);
+    document.addEventListener('mouseleave', handleMouseOut);
 
     return () => {
-      window.removeEventListener("resize", checkScreenSize);
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseover", handleMouseEnter);
-      document.removeEventListener("mouseout", handleMouseLeave);
-      document.removeEventListener("mouseleave", handleMouseOut);
+      window.removeEventListener('resize', checkScreenSize);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseEnter);
+      document.removeEventListener('mouseout', handleMouseLeave);
+      document.removeEventListener('mouseleave', handleMouseOut);
     };
   }, [cursorX, cursorY]);
 
@@ -86,7 +86,7 @@ export function CursorFollower() {
         transition={{
           type: "spring",
           stiffness: 400,
-          damping: 30,
+          damping: 30
         }}
       >
         <div className="w-8 h-8 bg-primary rounded-full" />
@@ -102,13 +102,13 @@ export function CursorFollower() {
             y: dot.springY,
           }}
           animate={{
-            opacity: isVisible ? 1 - i * 0.1 : 0,
+            opacity: isVisible ? (1 - i * 0.1) : 0,
             scale: isHovering ? 0.8 - i * 0.05 : 0.6 - i * 0.05,
           }}
         >
-          <div
+          <div 
             className="w-2 h-2 bg-primary/60 rounded-full"
-            style={{
+            style={{ 
               transform: `translate(${6 + i}px, ${6 + i}px)`,
             }}
           />
@@ -129,7 +129,7 @@ export function CursorFollower() {
         transition={{
           type: "spring",
           stiffness: 300,
-          damping: 30,
+          damping: 30
         }}
       >
         <div className="w-8 h-8 bg-primary/20 rounded-full blur-md" />

@@ -1,21 +1,21 @@
-import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
-import { useEffect, useState, useRef } from "react";
-import { Code2, Palette, Zap, Globe, Database, Smartphone } from "lucide-react";
+import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
+import { useEffect, useState, useRef } from 'react';
+import { Code2, Palette, Zap, Globe, Database, Smartphone } from 'lucide-react';
 
 interface Spline3DProps {
   className?: string;
 }
 
-export function Spline3D({ className = "" }: Spline3DProps) {
+export function Spline3D({ className = '' }: Spline3DProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-
+  
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
+  
   const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
   const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
-
+  
   const springRotateX = useSpring(rotateX, { stiffness: 300, damping: 30 });
   const springRotateY = useSpring(rotateY, { stiffness: 300, damping: 30 });
 
@@ -24,43 +24,47 @@ export function Spline3D({ className = "" }: Spline3DProps) {
       // Only track mouse on large screens
       if (window.innerWidth < 1024) return;
       if (!containerRef.current) return;
-
+      
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-
+      
       const x = (event.clientX - centerX) / rect.width;
       const y = (event.clientY - centerY) / rect.height;
-
+      
       setMousePosition({ x, y });
       mouseX.set(x);
       mouseY.set(y);
     };
 
     const container = containerRef.current;
-    container?.addEventListener("mousemove", handleMouseMove);
-
-    return () => container?.removeEventListener("mousemove", handleMouseMove);
+    container?.addEventListener('mousemove', handleMouseMove);
+    
+    return () => container?.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
   const icons = [
-    { Icon: Code2, color: "text-blue-500", position: { x: 20, y: 20 } },
-    { Icon: Palette, color: "text-purple-500", position: { x: 80, y: 15 } },
-    { Icon: Database, color: "text-green-500", position: { x: 15, y: 70 } },
-    { Icon: Globe, color: "text-cyan-500", position: { x: 75, y: 80 } },
-    { Icon: Smartphone, color: "text-pink-500", position: { x: 50, y: 30 } },
-    { Icon: Zap, color: "text-yellow-500", position: { x: 60, y: 65 } },
+    { Icon: Code2, color: 'text-blue-500', position: { x: 20, y: 20 } },
+    { Icon: Palette, color: 'text-purple-500', position: { x: 80, y: 15 } },
+    { Icon: Database, color: 'text-green-500', position: { x: 15, y: 70 } },
+    { Icon: Globe, color: 'text-cyan-500', position: { x: 75, y: 80 } },
+    { Icon: Smartphone, color: 'text-pink-500', position: { x: 50, y: 30 } },
+    { Icon: Zap, color: 'text-yellow-500', position: { x: 60, y: 65 } }
   ];
 
   return (
-    <div ref={containerRef} className={`relative w-full h-full perspective-1000 ${className}`} style={{ perspective: "1000px" }}>
+    <div 
+      ref={containerRef}
+      className={`relative w-full h-full perspective-1000 ${className}`}
+      style={{ perspective: '1000px' }}
+    >
       {/* Main 3D Container */}
       <motion.div
         className="relative w-full h-full hidden lg:block"
         style={{
           rotateX: springRotateX,
           rotateY: springRotateY,
-          transformStyle: "preserve-3d",
+          transformStyle: 'preserve-3d',
         }}
       >
         {/* Central geometric shape */}
@@ -72,7 +76,7 @@ export function Spline3D({ className = "" }: Spline3DProps) {
           transition={{
             duration: 50,
             repeat: Infinity,
-            ease: "linear",
+            ease: "linear"
           }}
         >
           <div className="relative w-80 h-80 md:w-96 md:h-96">
@@ -85,13 +89,13 @@ export function Spline3D({ className = "" }: Spline3DProps) {
               transition={{
                 duration: 6,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: "easeInOut"
               }}
               style={{
                 transform: `translateZ(20px)`,
               }}
             />
-
+            
             {/* Middle ring - simplified */}
             <motion.div
               className="absolute inset-8 rounded-full border border-accent/30 bg-gradient-to-tl from-accent/10 to-primary/5 backdrop-blur-sm"
@@ -99,7 +103,7 @@ export function Spline3D({ className = "" }: Spline3DProps) {
                 transform: `translateZ(40px)`,
               }}
             />
-
+            
             {/* Inner core - reduced animation */}
             <motion.div
               className="absolute inset-16 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-accent/15 backdrop-blur-md border border-primary/30"
@@ -109,13 +113,13 @@ export function Spline3D({ className = "" }: Spline3DProps) {
               transition={{
                 duration: 8,
                 repeat: Infinity,
-                ease: "linear",
+                ease: "linear"
               }}
               style={{
                 transform: `translateZ(60px)`,
               }}
             />
-
+            
             {/* Central glowing orb */}
             <motion.div
               className="absolute top-1/2 left-1/2 w-8 h-8 -mt-4 -ml-4 bg-primary rounded-full shadow-lg"
@@ -126,7 +130,7 @@ export function Spline3D({ className = "" }: Spline3DProps) {
               transition={{
                 duration: 3,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: "easeInOut"
               }}
               style={{
                 transform: `translateZ(80px)`,
@@ -152,14 +156,16 @@ export function Spline3D({ className = "" }: Spline3DProps) {
               duration: 5 + index,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: index * 0.5,
+              delay: index * 0.5
             }}
             whileHover={{
               scale: 1.2,
-              transition: { duration: 0.2 },
+              transition: { duration: 0.2 }
             }}
           >
-            <motion.div className="p-4 bg-background/20 backdrop-blur-sm rounded-xl border border-primary/20 shadow-lg">
+            <motion.div
+              className="p-4 bg-background/20 backdrop-blur-sm rounded-xl border border-primary/20 shadow-lg"
+            >
               <item.Icon className={`w-6 h-6 ${item.color}`} />
             </motion.div>
           </motion.div>
@@ -177,12 +183,14 @@ export function Spline3D({ className = "" }: Spline3DProps) {
             transition={{
               duration: 6,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "easeInOut"
             }}
           />
-
-          <motion.div className="absolute inset-8 rounded-full border border-accent/30 bg-gradient-to-tl from-accent/10 to-primary/5 backdrop-blur-sm" />
-
+          
+          <motion.div
+            className="absolute inset-8 rounded-full border border-accent/30 bg-gradient-to-tl from-accent/10 to-primary/5 backdrop-blur-sm"
+          />
+          
           <motion.div
             className="absolute top-1/2 left-1/2 w-8 h-8 -mt-4 -ml-4 bg-primary rounded-full shadow-lg"
             animate={{
@@ -192,7 +200,7 @@ export function Spline3D({ className = "" }: Spline3DProps) {
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "easeInOut"
             }}
           />
         </div>
@@ -210,7 +218,7 @@ export function Spline3D({ className = "" }: Spline3DProps) {
         transition={{
           duration: 3,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut"
         }}
       />
     </div>
